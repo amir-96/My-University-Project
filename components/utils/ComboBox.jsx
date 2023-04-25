@@ -6,9 +6,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ComboBoxComponent({ comboData }) {
+export default function ComboBoxComponent({ workGroup, comboData }) {
   const [query, setQuery] = useState("");
-  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [selectedPerson, setSelectedPerson] = useState(workGroup);
 
   const filteredCombo =
     query === ""

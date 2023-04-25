@@ -83,17 +83,20 @@ const PersonnelEdit = ({ personData, switchHandler }) => {
             >
               دسته ی کاری
             </label>
-            <ComboBoxComponent comboData={groups} />
+            <ComboBoxComponent
+              wGroup={personData.workGroup}
+              comboData={groups}
+            />
           </div>
           <div>
             {personData.retired ? (
               <div className="mt-[35px] flex gap-2">
-                <SwitchToggle status={personData.retired} />
+                <SwitchToggle status={!personData.retired} />
                 <span>بازنشسته</span>
               </div>
             ) : (
               <div className="mt-[35px] flex gap-2">
-                <span onClick={() => switchHandler(personData)}>
+                <span onClick={() => switchHandler(personData.nNumber)}>
                   <SwitchToggle status={!personData.retired} />
                 </span>
                 <span>مشغول به کار</span>

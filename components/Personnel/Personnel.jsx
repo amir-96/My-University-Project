@@ -34,16 +34,15 @@ const Personnel = () => {
     setEditMode(true);
   };
 
-  const changeRetiredStateHandler = (editModeState) => {
-    for (let i in people) {
-      if (people[i].nNumber === editModeState.nNumber) {
-        people[i].retired = !people[i].retired;
-
-        setPeople(people);
-        console.log(editModeState.retired);
-        break;
+  const changeRetiredStateHandler = (nationalNumber) => {
+    const newPeople = people.map((person) => {
+      if (person.nNumber === nationalNumber) {
+        return { ...person, retired: !person.retired };
       }
-    }
+      return person;
+    });
+
+    setPeople(newPeople);
   };
 
   return (
@@ -116,7 +115,9 @@ const Personnel = () => {
                           className="duration-50 transition-all ease-in hover:bg-gray-100"
                         >
                           <td
-                            onClick={() => changeRetiredStateHandler(person)}
+                            onClick={() =>
+                              changeRetiredStateHandler(person.nNumber)
+                            }
                             className="whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6"
                           >
                             {person.name}
@@ -141,7 +142,7 @@ const Personnel = () => {
                                   : "bg-green-400"
                               }`}
                             >
-                              {person.retired ? "‌غیر فعال" : "فعال"}
+                              {person.retired ? "بازنشسته" : "فعال"}
                             </span>
                           </td>
                           <td>
