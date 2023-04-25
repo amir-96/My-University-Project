@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { RiUserSettingsLine } from "react-icons/ri";
+import { AiFillMinusCircle } from 'react-icons/ai'
 import PersonnelEdit from "./PersonnelEdit";
 
 const peopleList = [
@@ -44,6 +45,12 @@ const Personnel = () => {
 
     setPeople(newPeople);
   };
+
+  const removePersonnelHandler = (nationalNumber) => {
+    const newList = people.filter((person) => person.nNumber !== nationalNumber)
+
+    setPeople(newList)
+  }
 
   return (
     <>
@@ -115,11 +122,9 @@ const Personnel = () => {
                           className="duration-50 transition-all ease-in hover:bg-gray-100"
                         >
                           <td
-                            onClick={() =>
-                              changeRetiredStateHandler(person.nNumber)
-                            }
-                            className="whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6"
+                            className="relative whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6"
                           >
+                            <AiFillMinusCircle onClick={() => removePersonnelHandler(person.nNumber)} className="absolute right-4 text-red-500 cursor-pointer" />
                             {person.name}
                           </td>
                           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6">
