@@ -3,6 +3,7 @@ import { useState } from "react";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { AiFillMinusCircle } from 'react-icons/ai'
 import PersonnelEdit from "./PersonnelEdit";
+import PersonnelAdd from "./PersonnelAdd";
 
 const peopleList = [
   {
@@ -28,6 +29,8 @@ const Personnel = () => {
 
   const [editMode, setEditMode] = useState(false);
 
+  const [addMode, setAddMode] = useState(false);
+
   const [editModeState, setEditModeState] = useState({});
 
   const editUserHandler = (person) => {
@@ -45,6 +48,10 @@ const Personnel = () => {
 
     setPeople(newPeople);
   };
+
+  const addPersonHandler = () => {
+
+  }
 
   const removePersonnelHandler = (nationalNumber) => {
     const newList = people.filter((person) => person.nNumber !== nationalNumber)
@@ -176,6 +183,15 @@ const Personnel = () => {
             switchHandler={changeRetiredStateHandler}
             personData={editModeState}
           />
+        </div>
+      )}
+
+      {addMode && (
+        <div
+          id="backDrop"
+          className="fixed inset-0 z-20 flex items-center justify-center bg-black/50"
+        >
+          <PersonnelAdd />
         </div>
       )}
     </>
